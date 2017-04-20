@@ -5,30 +5,27 @@
 
 //my headers
 #include "Display.h"
-#include <iostream>
-
-using namespace std;
+#include "DebugTools.h"
 
 //deklaracje wstêpuj¹ce
 ALLEGRO_DISPLAY * initializeDisplay();
 bool displayInitialized(ALLEGRO_DISPLAY **display);
-void registerEvents(ALLEGRO_DISPLAY **display,ALLEGRO_TIMER **timer, ALLEGRO_EVENT_QUEUE **eventQueue);
-void installAllegroModules(ALLEGRO_DISPLAY **display);
+void registerEvents(ALLEGRO_DISPLAY *display,ALLEGRO_TIMER **timer, ALLEGRO_EVENT_QUEUE **eventQueue);
+void installAllegroModules(ALLEGRO_DISPLAY *display);
+
+void loop();	//main loop
 
 void doSth(int **time)
 {
-	cout << **time << endl;
+	logMessage(std::to_string(**time));
 
 	(**time)++;
 	
-	cout << **time << endl;
 	*time = NULL;
 }
 
 int main(int argc, char **argv)
 {
-
-
 	ALLEGRO_DISPLAY* display = NULL;
 	ALLEGRO_EVENT_QUEUE *eventQueue = NULL;
 	ALLEGRO_TIMER *timer = NULL;
@@ -37,10 +34,39 @@ int main(int argc, char **argv)
 		exit(0);
 
 	ALLEGRO_FONT* font = al_create_builtin_font();
-	installAllegroModules(&display);
-	registerEvents(&display, &timer, &eventQueue);
+	installAllegroModules(display);
+	registerEvents(display, &timer, &eventQueue);
 
-	displayMenu(&display, &font);
+	displayMenu(display, font);
+
+	ALLEGRO_EVENT eventObject;
+	bool gameInProgress = true;
+
+	while (gameInProgress)
+	{
+		al_wait_for_event(eventQueue, &eventObject);
+
+		loop();
+
+		switch (eventObject.type)
+		{
+		case ALLEGRO_EVENT_TIMER:
+			changeBackgroundColor(getBackgroundColor());
+			break;
+
+		case ALLEGRO_KEY_ESCAPE:
+			logMessage("cos");
+			gameInProgress = false;
+			break;
+
+		default:
+			break;
+		}
+	}
+
+	al_destroy_timer(timer);
+	al_destroy_event_queue(eventQueue);
+	al_destroy_display(display);
 
 	return 0;
 }
@@ -67,27 +93,30 @@ bool displayInitialized(ALLEGRO_DISPLAY **display)
 }
 
 //register event queue
-void registerEvents(ALLEGRO_DISPLAY **display, ALLEGRO_TIMER **timer, ALLEGRO_EVENT_QUEUE **eventQueue)
+void registerEvents(ALLEGRO_DISPLAY *display, ALLEGRO_TIMER **timer, ALLEGRO_EVENT_QUEUE **eventQueue)
 {
-	*timer =  al_create_timer(1.0 / FPS);
+	*timer =  al_create_timer(ALLEGRO_BPS_TO_SECS(FPS));
 	
 	*eventQueue = al_create_event_queue();
 
-	al_register_event_source(*eventQueue, al_get_keyboard_event_source());
-	al_register_event_source(*eventQueue, al_get_display_event_source(*display));
+	al_register_event_source(*eventQueue, al_get_display_event_source(display));
 	al_register_event_source(*eventQueue, al_get_timer_event_source(*timer));
+	al_register_event_source(*eventQueue, al_get_keyboard_event_source());
 	al_register_event_source(*eventQueue, al_get_mouse_event_source());
+
 	al_start_timer(*timer);
 }
 
-void installAllegroModules(ALLEGRO_DISPLAY ** display)
+void installAllegroModules(ALLEGRO_DISPLAY * display)
 {
 	al_init_primitives_addon();
 	al_install_keyboard();
 	al_init_font_addon();
 
-	al_hide_mouse_cursor(*display);
+	al_hide_mouse_cursor(display);
 	al_install_mouse();
 }
 
-
+void loop()
+{
+}

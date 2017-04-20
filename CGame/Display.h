@@ -7,7 +7,10 @@
 #define DISPLAY_WIDTH 600
 #define FPS 30
 
-void displayMenu(ALLEGRO_DISPLAY ** display, ALLEGRO_FONT **font);
-void displayGame(ALLEGRO_DISPLAY ** display, ALLEGRO_FONT **font);
-void displaySettings(ALLEGRO_DISPLAY ** display, ALLEGRO_FONT **font);
-void displayGameEditor(ALLEGRO_DISPLAY ** display, ALLEGRO_FONT **font);
+void displayMenu(ALLEGRO_DISPLAY * display, ALLEGRO_FONT *font);
+void displayGame(ALLEGRO_DISPLAY * display, ALLEGRO_FONT *font);
+void displaySettings(ALLEGRO_DISPLAY * display, ALLEGRO_FONT *font);
+void displayGameEditor(ALLEGRO_DISPLAY * display, ALLEGRO_FONT *font);
+void changeBackgroundColor(unsigned char r, unsigned char g, unsigned char b);
+void changeBackgroundColor(ALLEGRO_COLOR color);
+ALLEGRO_COLOR getBackgroundColor();
