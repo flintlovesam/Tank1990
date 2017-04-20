@@ -13,6 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\Game">
+      <UniqueIdentifier>{2d99ada9-d416-4f7f-8e99-a3edf7925aff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\IO">
+      <UniqueIdentifier>{88abd63a-0add-4a6c-8f33-668ec5fda94d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DISPLAYS">
+      <UniqueIdentifier>{2eca9597-7f38-4624-8bcd-2fb5b776fb7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\COLORS">
+      <UniqueIdentifier>{368cbdcf-04ce-4f88-94b7-a45c23646543}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -21,5 +33,16 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Display.cpp">
+      <Filter>Source Files\DISPLAYS</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Display.h">
+      <Filter>Source Files\DISPLAYS</Filter>
+    </ClInclude>
+    <ClInclude Include="Colors.h">
+      <Filter>Source Files\COLORS</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
