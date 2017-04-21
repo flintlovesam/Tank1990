@@ -4,6 +4,11 @@
 #define MENU_MAX_ELEMENTS 20
 
 typedef  void (*MenuElementDelegate)();
+struct MenuElement
+{
+	std::string title;
+	MenuElementDelegate function;
+};
 
 struct MenuStruct
 {
@@ -13,11 +18,8 @@ struct MenuStruct
 	bool registered;
 	MenuStruct();
 	MenuStruct(int size);
-	void AddElement(MenuElement element);
 };
 
-struct MenuElement
-{
-	std::string title;
-	MenuElementDelegate function;
-};
+
+
+void AddMenuElement(MenuStruct &menuStructure, MenuElement elementToAdd);

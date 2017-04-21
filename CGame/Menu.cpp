@@ -13,11 +13,11 @@ MenuStruct::MenuStruct(int size) {
 	registered = true;
 }
 
-void MenuStruct::AddElement(MenuElement element)
+void AddMenuElement(MenuStruct & menuStructure, MenuElement elementToAdd)
 {
-	if (this->registered)
+	if (menuStructure.registered)
 	{
-		if (this->currentSize < this->maxSize - 1)
-			this->element[currentSize++] = element;
+		if (menuStructure.currentSize < menuStructure.maxSize - 1)
+			menuStructure.element[menuStructure.currentSize++] = elementToAdd;
 	}
 }

@@ -1,7 +1,7 @@
 #pragma once
 #include "DebugTools.h"
-typedef void(*LoopFunction)();
-
+#include "allegro5\allegro.h"
+typedef void(*LoopFunction)(ALLEGRO_DISPLAY *, ALLEGRO_TIMER *, ALLEGRO_EVENT_QUEUE *);
 struct LoopFunctionsStruct
 {
 	LoopFunction * functionsArray;
@@ -12,6 +12,6 @@ struct LoopFunctionsStruct
 };
 
 void initializeLoopFunctions(int maxSize);
-void registerLoopFunction(void (*function)());
+void registerLoopFunction(void (*function)(ALLEGRO_DISPLAY *, ALLEGRO_TIMER *, ALLEGRO_EVENT_QUEUE *));
 LoopFunction * getLoopFunctions(int &size);
-void GlobalLoop();
+void GlobalLoop(ALLEGRO_DISPLAY *, ALLEGRO_TIMER *, ALLEGRO_EVENT_QUEUE *);

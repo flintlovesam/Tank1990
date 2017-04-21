@@ -12,7 +12,6 @@ ALLEGRO_DISPLAY * initializeDisplay();
 bool displayInitialized(ALLEGRO_DISPLAY **display);
 void registerEvents(ALLEGRO_DISPLAY *display, ALLEGRO_TIMER **timer, ALLEGRO_EVENT_QUEUE **eventQueue);
 void installAllegroModules(ALLEGRO_DISPLAY *display);
-void registerLoopFunction(void *function);
 
 void mainLoop();	//main loop
 
@@ -37,8 +36,11 @@ int main(int argc, char **argv)
 	ALLEGRO_FONT* font = al_create_builtin_font();
 	installAllegroModules(display);
 	registerEvents(display, &timer, &eventQueue);
+
+	//if there are more than 1 loop function register it
 	initializeLoopFunctions(10);
 	registerLoopFunction(&mainLoop);
+
 
 	displayMenu(display, font);
 
@@ -49,7 +51,7 @@ int main(int argc, char **argv)
 	{
 		al_wait_for_event(eventQueue, &eventObject);
 
-		GlobalLoop();
+		GlobalLoop(display, timer, eventQueue);	//invokes all registered loops
 
 		switch (eventObject.type)
 		{
@@ -126,7 +128,7 @@ void installAllegroModules(ALLEGRO_DISPLAY * display)
 	al_install_mouse();
 }
 
-void mainLoop()
+void mainLoop(ALLEGRO_DISPLAY *display, ALLEGRO_TIMER *timer, ALLEGRO_EVENT_QUEUE *eventQueue)
 {
 	logMessage("pierwszy loop!");
 }

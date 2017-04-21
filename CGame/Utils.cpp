@@ -11,7 +11,7 @@ void initializeLoopFunctions(int maxSize)
 	loopFunctions.registrated = true;
 }
 
-void registerLoopFunction(void(*function)())
+void registerLoopFunction(void(*function)(ALLEGRO_DISPLAY *, ALLEGRO_TIMER *, ALLEGRO_EVENT_QUEUE *))
 {
 	if (!loopFunctions.registrated)
 	{
@@ -32,7 +32,7 @@ LoopFunction * getLoopFunctions(int &size)
 	return loopFunctions.functionsArray;
 }
 
-void GlobalLoop()
+void GlobalLoop(ALLEGRO_DISPLAY *display, ALLEGRO_TIMER *timer, ALLEGRO_EVENT_QUEUE *eventQueue)
 {
 	if (!loopFunctions.registrated)
 	{
@@ -41,7 +41,7 @@ void GlobalLoop()
 	}
 	for (int i = 0; i < loopFunctions.currentSize; i++)
 	{
-		loopFunctions.functionsArray[i]();
+		loopFunctions.functionsArray[i](display, timer, eventQueue);
 	}
 }
 
