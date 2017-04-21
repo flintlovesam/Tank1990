@@ -31,6 +31,9 @@
     <Filter Include="Source Files\UTILS">
       <UniqueIdentifier>{cdf1f858-c6be-4db4-b290-20a08a1f0c83}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Menu">
+      <UniqueIdentifier>{1886161a-a8d0-4fc5-bdd2-be8370e3917f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -48,6 +51,9 @@
     <ClCompile Include="Utils.cpp">
       <Filter>Source Files\UTILS</Filter>
     </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Source Files\Menu</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Display.h">
@@ -61,6 +67,9 @@
     </ClInclude>
     <ClInclude Include="Utils.h">
       <Filter>Source Files\UTILS</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Source Files\Menu</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -8,6 +8,15 @@
 #define DISPLAY_WIDTH 600
 #define FPS 30
 
+typedef enum SCREEN_NAME;
+enum SCREEN_NAME
+{
+	SCREEN_MENU,
+	SCREEN_SETTINGS,
+	SCREEN_GAME,
+	SCREEN_GAMEEDITOR
+};
+
 void displayLoop();
 void displayMenu(ALLEGRO_DISPLAY * display, ALLEGRO_FONT *font);
 void displayGame(ALLEGRO_DISPLAY * display, ALLEGRO_FONT *font);
