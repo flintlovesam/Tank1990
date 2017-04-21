@@ -7,13 +7,13 @@ void logMessage(std::string message, MESSAGE_PRIORITY priority)
 
 	switch (priority)
 	{
-	case LOG:
+	case MESSAGE_LOG:
 		std::cout << "LOG:\t";
 		break;
-	case WARNING:		
+	case MESSAGE_WARNING:		
 		std::cout << "WAR:\t";
 		break;
-	case ERROR:
+	case MESSAGE_ERROR:
 		std::cout << "ERR:\t";
 		break;
 	default:

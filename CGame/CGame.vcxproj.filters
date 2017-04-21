@@ -28,6 +28,9 @@
     <Filter Include="Source Files\DEBUG_TOOLS">
       <UniqueIdentifier>{d7e309e6-5bf9-4341-b83b-6512509f34e6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\UTILS">
+      <UniqueIdentifier>{cdf1f858-c6be-4db4-b290-20a08a1f0c83}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -42,6 +45,9 @@
     <ClCompile Include="DebugTools.cpp">
       <Filter>Source Files\DEBUG_TOOLS</Filter>
     </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>Source Files\UTILS</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Display.h">
@@ -52,6 +58,9 @@
     </ClInclude>
     <ClInclude Include="DebugTools.h">
       <Filter>Source Files\DEBUG_TOOLS</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Source Files\UTILS</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

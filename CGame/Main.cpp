@@ -5,22 +5,23 @@
 
 //my headers
 #include "Display.h"
-#include "DebugTools.h"
+#include "Utils.h"
 
 //deklaracje wstêpuj¹ce
 ALLEGRO_DISPLAY * initializeDisplay();
 bool displayInitialized(ALLEGRO_DISPLAY **display);
-void registerEvents(ALLEGRO_DISPLAY *display,ALLEGRO_TIMER **timer, ALLEGRO_EVENT_QUEUE **eventQueue);
+void registerEvents(ALLEGRO_DISPLAY *display, ALLEGRO_TIMER **timer, ALLEGRO_EVENT_QUEUE **eventQueue);
 void installAllegroModules(ALLEGRO_DISPLAY *display);
+void registerLoopFunction(void *function);
 
-void loop();	//main loop
+void mainLoop();	//main loop
 
 void doSth(int **time)
 {
 	logMessage(std::to_string(**time));
 
 	(**time)++;
-	
+
 	*time = NULL;
 }
 
@@ -36,6 +37,8 @@ int main(int argc, char **argv)
 	ALLEGRO_FONT* font = al_create_builtin_font();
 	installAllegroModules(display);
 	registerEvents(display, &timer, &eventQueue);
+	initializeLoopFunctions(10);
+	registerLoopFunction(&mainLoop);
 
 	displayMenu(display, font);
 
@@ -46,7 +49,7 @@ int main(int argc, char **argv)
 	{
 		al_wait_for_event(eventQueue, &eventObject);
 
-		loop();
+		GlobalLoop();
 
 		switch (eventObject.type)
 		{
@@ -54,9 +57,15 @@ int main(int argc, char **argv)
 			changeBackgroundColor(getBackgroundColor());
 			break;
 
-		case ALLEGRO_KEY_ESCAPE:
-			logMessage("cos");
-			gameInProgress = false;
+		case ALLEGRO_EVENT_KEY_DOWN:
+			switch (eventObject.keyboard.keycode)
+			{
+			case ALLEGRO_KEY_ESCAPE:
+				gameInProgress = false;
+			default:
+				break;
+			}
+
 			break;
 
 		default:
@@ -95,8 +104,8 @@ bool displayInitialized(ALLEGRO_DISPLAY **display)
 //register event queue
 void registerEvents(ALLEGRO_DISPLAY *display, ALLEGRO_TIMER **timer, ALLEGRO_EVENT_QUEUE **eventQueue)
 {
-	*timer =  al_create_timer(ALLEGRO_BPS_TO_SECS(FPS));
-	
+	*timer = al_create_timer(ALLEGRO_BPS_TO_SECS(FPS));
+
 	*eventQueue = al_create_event_queue();
 
 	al_register_event_source(*eventQueue, al_get_display_event_source(display));
@@ -117,6 +126,7 @@ void installAllegroModules(ALLEGRO_DISPLAY * display)
 	al_install_mouse();
 }
 
-void loop()
+void mainLoop()
 {
+	logMessage("pierwszy loop!");
 }
