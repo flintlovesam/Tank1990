@@ -22,7 +22,7 @@ void displayGame(ALLEGRO_DISPLAY * display, ALLEGRO_FONT *font)
 	al_rest(2.0);
 }
 
-void displayLoop()
+void displayLoop(ALLEGRO_DISPLAY *display, ALLEGRO_TIMER *timer, ALLEGRO_EVENT_QUEUE *eventQueue)
 {
 	logMessage("Drugi loop", MESSAGE_WARNING);
 }

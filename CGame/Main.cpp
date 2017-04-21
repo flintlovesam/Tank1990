@@ -13,7 +13,7 @@ bool displayInitialized(ALLEGRO_DISPLAY **display);
 void registerEvents(ALLEGRO_DISPLAY *display, ALLEGRO_TIMER **timer, ALLEGRO_EVENT_QUEUE **eventQueue);
 void installAllegroModules(ALLEGRO_DISPLAY *display);
 
-void mainLoop();	//main loop
+void mainLoop(ALLEGRO_DISPLAY *, ALLEGRO_TIMER *, ALLEGRO_EVENT_QUEUE *);
 
 void doSth(int **time)
 {
@@ -130,5 +130,5 @@ void installAllegroModules(ALLEGRO_DISPLAY * display)
 
 void mainLoop(ALLEGRO_DISPLAY *display, ALLEGRO_TIMER *timer, ALLEGRO_EVENT_QUEUE *eventQueue)
 {
-	logMessage("pierwszy loop!");
+	
 }

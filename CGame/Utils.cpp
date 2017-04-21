@@ -11,7 +11,7 @@ void initializeLoopFunctions(int maxSize)
 	loopFunctions.registrated = true;
 }
 
-void registerLoopFunction(void(*function)(ALLEGRO_DISPLAY *, ALLEGRO_TIMER *, ALLEGRO_EVENT_QUEUE *))
+void registerLoopFunction(LoopFunction function)
 {
 	if (!loopFunctions.registrated)
 	{

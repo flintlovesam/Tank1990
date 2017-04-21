@@ -17,7 +17,7 @@ enum SCREEN_NAME
 	SCREEN_GAMEEDITOR
 };
 
-void displayLoop();
+void displayLoop(ALLEGRO_DISPLAY *display, ALLEGRO_TIMER *timer, ALLEGRO_EVENT_QUEUE *eventQueue);
 void displayMenu(ALLEGRO_DISPLAY * display, ALLEGRO_FONT *font);
 void displayGame(ALLEGRO_DISPLAY * display, ALLEGRO_FONT *font);
 void displaySettings(ALLEGRO_DISPLAY * display, ALLEGRO_FONT *font);
