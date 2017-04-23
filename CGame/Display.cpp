@@ -7,17 +7,30 @@ void displayMenu(ALLEGRO_DISPLAY * display, ALLEGRO_FONT *font)
 {
 	changeBackgroundColor(DISPLAY_BACKGROUND);
 	al_draw_text(font, al_map_rgb(COLOR_WHITE), DISPLAY_HEIGHT/2, DISPLAY_WIDTH/2, ALLEGRO_ALIGN_CENTER, "menu display!");
-	al_flip_display();
+
 	registerLoopFunction(&displayLoop);
+
+	MenuStruct *menu = new MenuStruct(10);
+	menu->AutomaticLeftMargin(true);
+	MenuElement element1;
+	element1.title = "kupa";
+
+	menu->AddElement(element1);
+	element1.title = "pupa";
+	menu->AddElement(element1);
+	element1.title = "aaa";
+	menu->AddElement(element1);
+	menu->display(display, font);
+	
 	//waits for 5 sec
 	//al_rest(2.0);
 }
 
 void displayGame(ALLEGRO_DISPLAY * display, ALLEGRO_FONT *font)
 {
-	changeBackgroundColor(DISPLAY_BACKGROUND);
-	al_draw_text(font, al_map_rgb(COLOR_WHITE), DISPLAY_HEIGHT/2, DISPLAY_WIDTH/2, ALLEGRO_ALIGN_CENTER, "menu game!");
-	al_flip_display();
+	changeBackgroundColor(COLOR_BLUE);
+	al_draw_text(font, al_map_rgb(COLOR_WHITE), DISPLAY_HEIGHT/2, DISPLAY_WIDTH/2, ALLEGRO_ALIGN_LEFT, "menu game!");
+
 	//waits for 5 sec
 	al_rest(2.0);
 }

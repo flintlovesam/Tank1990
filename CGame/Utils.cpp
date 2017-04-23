@@ -43,5 +43,6 @@ void GlobalLoop(ALLEGRO_DISPLAY *display, ALLEGRO_TIMER *timer, ALLEGRO_EVENT_QU
 	{
 		loopFunctions.functionsArray[i](display, timer, eventQueue);
 	}
+	al_flip_display();
 }
 

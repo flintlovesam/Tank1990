@@ -3,7 +3,8 @@
 #include <allegro5/allegro_font.h>
 #include "Colors.h"
 #include "Utils.h"
-#define DISPLAY_BACKGROUND 0,0,0
+#include "Menu.h"
+#define DISPLAY_BACKGROUND 0,255,0
 #define DISPLAY_HEIGHT 800
 #define DISPLAY_WIDTH 600
 #define FPS 30

@@ -2,7 +2,6 @@
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_native_dialog.h>
 #include <allegro5/allegro_primitives.h>
-
 //my headers
 #include "Display.h"
 #include "Utils.h"
@@ -34,13 +33,13 @@ int main(int argc, char **argv)
 		exit(0);
 
 	ALLEGRO_FONT* font = al_create_builtin_font();
+	
 	installAllegroModules(display);
 	registerEvents(display, &timer, &eventQueue);
 
 	//if there are more than 1 loop function register it
 	initializeLoopFunctions(10);
 	registerLoopFunction(&mainLoop);
-
 
 	displayMenu(display, font);
 
@@ -56,7 +55,6 @@ int main(int argc, char **argv)
 		switch (eventObject.type)
 		{
 		case ALLEGRO_EVENT_TIMER:
-			changeBackgroundColor(getBackgroundColor());
 			break;
 
 		case ALLEGRO_EVENT_KEY_DOWN:
@@ -130,5 +128,5 @@ void installAllegroModules(ALLEGRO_DISPLAY * display)
 
 void mainLoop(ALLEGRO_DISPLAY *display, ALLEGRO_TIMER *timer, ALLEGRO_EVENT_QUEUE *eventQueue)
 {
-	
+	logMessage("elo");
 }
