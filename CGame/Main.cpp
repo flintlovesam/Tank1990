@@ -12,7 +12,7 @@ bool displayInitialized(ALLEGRO_DISPLAY **display);
 void registerEvents(ALLEGRO_DISPLAY *display, ALLEGRO_TIMER **timer, ALLEGRO_EVENT_QUEUE **eventQueue);
 void installAllegroModules(ALLEGRO_DISPLAY *display);
 
-void mainLoop(ALLEGRO_DISPLAY *, ALLEGRO_TIMER *, ALLEGRO_EVENT_QUEUE *);
+void mainLoop(ALLEGRO_DISPLAY *, ALLEGRO_TIMER *, ALLEGRO_EVENT_QUEUE *, ALLEGRO_EVENT *);
 
 void doSth(int **time)
 {
@@ -40,20 +40,20 @@ int main(int argc, char **argv)
 	//if there are more than 1 loop function register it
 	initializeLoopFunctions(10);
 	registerLoopFunction(&mainLoop);
+	registerLoopFunction(&displayLoop);
 
-	displayMenu(display, font);
-
+	initializeMenus(display, font);
+	displayScreen(SCREEN_MENU, display, timer);
 	ALLEGRO_EVENT eventObject;
 	bool gameInProgress = true;
 
 	while (gameInProgress)
 	{
-		al_wait_for_event(eventQueue, &eventObject);
-
-		GlobalLoop(display, timer, eventQueue);	//invokes all registered loops
+		GlobalLoop(display, timer, eventQueue, &eventObject);	//invokes all registered loops
 
 		switch (eventObject.type)
 		{
+
 		case ALLEGRO_EVENT_TIMER:
 			break;
 
@@ -126,7 +126,7 @@ void installAllegroModules(ALLEGRO_DISPLAY * display)
 	al_install_mouse();
 }
 
-void mainLoop(ALLEGRO_DISPLAY *display, ALLEGRO_TIMER *timer, ALLEGRO_EVENT_QUEUE *eventQueue)
+void mainLoop(ALLEGRO_DISPLAY *display, ALLEGRO_TIMER *timer, ALLEGRO_EVENT_QUEUE *eventQueue, ALLEGRO_EVENT * eventObject)
 {
-	logMessage("elo");
+
 }

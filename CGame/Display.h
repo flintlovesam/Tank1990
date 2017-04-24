@@ -12,17 +12,16 @@
 typedef enum SCREEN_NAME;
 enum SCREEN_NAME
 {
-	SCREEN_MENU,
-	SCREEN_SETTINGS,
-	SCREEN_GAME,
-	SCREEN_GAMEEDITOR
+	SCREEN_MENU = 0,
+	SCREEN_SETTINGS = 1,
+	SCREEN_GAME = 2,
+	SCREEN_GAMEEDITOR = 3
 };
 
-void displayLoop(ALLEGRO_DISPLAY *display, ALLEGRO_TIMER *timer, ALLEGRO_EVENT_QUEUE *eventQueue);
-void displayMenu(ALLEGRO_DISPLAY * display, ALLEGRO_FONT *font);
-void displayGame(ALLEGRO_DISPLAY * display, ALLEGRO_FONT *font);
-void displaySettings(ALLEGRO_DISPLAY * display, ALLEGRO_FONT *font);
-void displayGameEditor(ALLEGRO_DISPLAY * display, ALLEGRO_FONT *font);
+void displayLoop(ALLEGRO_DISPLAY *display, ALLEGRO_TIMER *timer, ALLEGRO_EVENT_QUEUE *eventQueue, ALLEGRO_EVENT * eventObject);
+void displayScreen(SCREEN_NAME, ALLEGRO_DISPLAY *, ALLEGRO_TIMER * );
 void changeBackgroundColor(unsigned char r, unsigned char g, unsigned char b);
 void changeBackgroundColor(ALLEGRO_COLOR color);
+void initializeMenus(ALLEGRO_DISPLAY *display, ALLEGRO_FONT *font);
 ALLEGRO_COLOR getBackgroundColor();
+void doSth();
