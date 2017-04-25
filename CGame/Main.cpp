@@ -1,8 +1,10 @@
+#pragma once
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_native_dialog.h>
 #include <allegro5/allegro_primitives.h>
 //my headers
+#include "Game.h"
 #include "Display.h"
 #include "Utils.h"
 
@@ -14,14 +16,7 @@ void installAllegroModules(ALLEGRO_DISPLAY *display);
 
 void mainLoop(ALLEGRO_DISPLAY *, ALLEGRO_TIMER *, ALLEGRO_EVENT_QUEUE *, ALLEGRO_EVENT *);
 
-void doSth(int **time)
-{
-	logMessage(std::to_string(**time));
-
-	(**time)++;
-
-	*time = NULL;
-}
+bool gameInProgress = true;
 
 int main(int argc, char **argv)
 {
@@ -37,40 +32,23 @@ int main(int argc, char **argv)
 	installAllegroModules(display);
 	registerEvents(display, &timer, &eventQueue);
 
+
 	//if there are more than 1 loop function register it
 	initializeLoopFunctions(10);
 	registerLoopFunction(&mainLoop);
 	registerLoopFunction(&displayLoop);
+	registerLoopFunction(&gameLoop);
+
+
+
 
 	initializeMenus(display, font);
-	displayScreen(SCREEN_SETTINGS, display, timer);
+	displayScreen(SCREEN_SETTINGS, display, timer, font);
 	ALLEGRO_EVENT eventObject;
-	bool gameInProgress = true;
 
 	while (gameInProgress)
 	{
 		GlobalLoop(display, timer, eventQueue, &eventObject);	//invokes all registered loops
-
-		switch (eventObject.type)
-		{
-
-		case ALLEGRO_EVENT_TIMER:
-			break;
-
-		case ALLEGRO_EVENT_KEY_DOWN:
-			switch (eventObject.keyboard.keycode)
-			{
-			case ALLEGRO_KEY_ESCAPE:
-				gameInProgress = false;
-			default:
-				break;
-			}
-
-			break;
-
-		default:
-			break;
-		}
 	}
 
 	al_destroy_timer(timer);
@@ -126,7 +104,27 @@ void installAllegroModules(ALLEGRO_DISPLAY * display)
 	al_install_mouse();
 }
 
+
 void mainLoop(ALLEGRO_DISPLAY *display, ALLEGRO_TIMER *timer, ALLEGRO_EVENT_QUEUE *eventQueue, ALLEGRO_EVENT * eventObject)
 {
+	switch (eventObject->type)
+	{
 
+	case ALLEGRO_EVENT_TIMER:
+		break;
+
+	case ALLEGRO_EVENT_KEY_DOWN:
+		switch (eventObject->keyboard.keycode)
+		{
+		case ALLEGRO_KEY_ESCAPE:
+			gameInProgress = false;
+		default:
+			break;
+		}
+
+		break;
+
+	default:
+		break;
+	}
 }

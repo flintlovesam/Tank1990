@@ -163,6 +163,7 @@
   <ItemGroup>
     <ClCompile Include="DebugTools.cpp" />
     <ClCompile Include="Display.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Utils.cpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="Colors.h" />
     <ClInclude Include="DebugTools.h" />
     <ClInclude Include="Display.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
