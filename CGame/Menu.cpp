@@ -65,8 +65,6 @@ unsigned int MenuStruct::CalculateTopMargin()
 
 void MenuStruct::display(ALLEGRO_DISPLAY * display)
 {
-	if (this->menuIterator == 0)
-		return;
 	if (this->font == NULL)
 	{
 		logMessage("Font is not set", MESSAGE_ERROR);

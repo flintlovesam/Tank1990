@@ -19,7 +19,7 @@ enum SCREEN_NAME
 };
 
 void displayLoop(ALLEGRO_DISPLAY *display, ALLEGRO_TIMER *timer, ALLEGRO_EVENT_QUEUE *eventQueue, ALLEGRO_EVENT * eventObject);
-void displayScreen(SCREEN_NAME, ALLEGRO_DISPLAY *, ALLEGRO_TIMER * );
+void displayScreen(SCREEN_NAME, ALLEGRO_DISPLAY *, ALLEGRO_TIMER * , ALLEGRO_FONT *);
 void changeBackgroundColor(unsigned char r, unsigned char g, unsigned char b);
 void changeBackgroundColor(ALLEGRO_COLOR color);
 void initializeMenus(ALLEGRO_DISPLAY *display, ALLEGRO_FONT *font);

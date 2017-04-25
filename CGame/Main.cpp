@@ -43,7 +43,7 @@ int main(int argc, char **argv)
 	registerLoopFunction(&displayLoop);
 
 	initializeMenus(display, font);
-	displayScreen(SCREEN_MENU, display, timer);
+	displayScreen(SCREEN_SETTINGS, display, timer);
 	ALLEGRO_EVENT eventObject;
 	bool gameInProgress = true;
 

@@ -3,6 +3,10 @@
 ALLEGRO_COLOR currentBackgroundColor;
 MenuStruct *menus;
 MenuStruct *activeMenu;
+ALLEGRO_DISPLAY *display;
+ALLEGRO_FONT *font;
+ALLEGRO_TIMER *timer;
+
 bool menuSelectorEnabled = false;
 //void displayMenu(ALLEGRO_DISPLAY * display, ALLEGRO_FONT *font)
 //{
@@ -12,8 +16,12 @@ bool menuSelectorEnabled = false;
 //	registerLoopFunction(&displayLoop);
 //}
 
-void displayScreen(SCREEN_NAME screen, ALLEGRO_DISPLAY *display, ALLEGRO_TIMER *font)
+void displayScreen(SCREEN_NAME screen, ALLEGRO_DISPLAY *display_arg, ALLEGRO_TIMER *timer_arg , ALLEGRO_FONT *font_arg)
 {
+	if (!display_arg)
+		return;
+	if (!font_arg)
+		return;
 	activeMenu = &menus[screen];
 	menuSelectorEnabled = true;
 	//switch (screen)
@@ -44,13 +52,18 @@ void changeBackgroundColor(ALLEGRO_COLOR color)
 	changeBackgroundColor(color.r, color.g, color.b);
 }
 
-void initializeMenus(ALLEGRO_DISPLAY *display, ALLEGRO_FONT *font)
+void initializeMenus(ALLEGRO_DISPLAY *display_arg, ALLEGRO_FONT *font_arg)
 {
+	
+	display = display_arg;
+	font = font_arg;
+
+
 	menus = new MenuStruct[20];
 	MenuStruct *menu = new MenuStruct(10);
 
 	menu->AutomaticLeftMargin(true);
-	menu->setFont(font);
+	menu->setFont(font_arg);
 
 	MenuElement *element = new MenuElement();
 	element->title = "Start new game";
@@ -68,7 +81,7 @@ void initializeMenus(ALLEGRO_DISPLAY *display, ALLEGRO_FONT *font)
 
 	menu = new MenuStruct(5);
 	menu->AutomaticLeftMargin(true);
-	menu->setFont(font);
+	menu->setFont(font_arg);
 	element = new MenuElement();
 	element->title = "Level";
 	menu->AddElement(*element);
@@ -93,7 +106,7 @@ ALLEGRO_COLOR getBackgroundColor()
 
 void doSth()
 {
-	logMessage("diong sth");
+	displayScreen(SCREEN_GAME, display, timer, font);
 }
 
 void displayLoop(ALLEGRO_DISPLAY *display, ALLEGRO_TIMER *timer, ALLEGRO_EVENT_QUEUE *eventQueue, ALLEGRO_EVENT * eventObject)
@@ -109,19 +122,18 @@ void displayLoop(ALLEGRO_DISPLAY *display, ALLEGRO_TIMER *timer, ALLEGRO_EVENT_Q
 		{
 		case ALLEGRO_KEY_UP:
 			activeMenu->incrementMenuIterator();
-			//logMessage("+ " + std::to_string(activeMenu->menuIterator));
 
 			break;
 		case ALLEGRO_KEY_DOWN:
 
 			activeMenu->decrementMenuIterator();
-		//	logMessage("- " + std::to_string(activeMenu->menuIterator));
 
 			break;
 		case ALLEGRO_KEY_ENTER:
 			if (activeMenu->element[activeMenu->menuIterator].function != nullptr)
 			{
 				activeMenu->element[activeMenu->menuIterator].function();
+				activeMenu = nullptr;
 			}
 			break;
 		default:
