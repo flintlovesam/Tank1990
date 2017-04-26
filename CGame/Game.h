@@ -7,16 +7,15 @@
 #include "Utils.h"
 #include "Display.h"
 
-typedef struct Position;
-typedef struct Opponent;
-typedef struct Game;
-typedef struct Player;
-typedef struct BoardBrick;
-typedef enum BRICK_TYPE;
-typedef struct Brick;
-typedef struct GameSettings;
-typedef struct Missile;
-typedef enum DIRECTION;
+//typedef struct Position;
+//typedef struct Opponent;
+//typedef struct Player;
+//typedef struct BoardBrick;
+//typedef enum BRICK_TYPE;
+//typedef struct Brick;
+//typedef struct GameSettings;
+//typedef struct Missile;
+//typedef enum DIRECTION;
 
 const unsigned short int BRICK_WALL_MAX_HITS = 3;
 
@@ -94,14 +93,15 @@ struct Opponent
 	Position position;
 };
 
-struct Game
+struct GameObj
 {
 	unsigned int height;
 	unsigned int width;
+	bool activated;
 	Opponent *oponents;
 	Player player;
 	
-} game;
+};
 
 
 void initializeGame();

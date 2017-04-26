@@ -2,15 +2,18 @@
 
 ALLEGRO_DISPLAY *displayArg;
 ALLEGRO_FONT *fontArg;
-
+GameObj game;
 void initializeGame()
 {
 	game.height = DISPLAY_HEIGHT;
 	game.width = DISPLAY_WIDTH;
+	game.activated = false;
 }
 
 void gameLoop(ALLEGRO_DISPLAY *display, ALLEGRO_TIMER *timer, ALLEGRO_EVENT_QUEUE *eventQueue, ALLEGRO_EVENT * eventObject)
 {
+	if (!game.activated)
+		return;
 	switch (eventObject->type)
 	{
 	case ALLEGRO_EVENT_KEY_DOWN:
@@ -42,7 +45,6 @@ void gameLoop(ALLEGRO_DISPLAY *display, ALLEGRO_TIMER *timer, ALLEGRO_EVENT_QUEU
 
 
 		default:
-			logMessage("Not updated!");
 			break;
 		}
 		break;
