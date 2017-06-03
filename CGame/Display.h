@@ -24,4 +24,6 @@ void changeBackgroundColor(unsigned char r, unsigned char g, unsigned char b);
 void changeBackgroundColor(ALLEGRO_COLOR color);
 void initializeMenus(ALLEGRO_DISPLAY *display, ALLEGRO_FONT *font);
 ALLEGRO_COLOR getBackgroundColor();
-void doSth();
+//displaying adequete screens
+void DisplaySettings();
+void DisplayGame();

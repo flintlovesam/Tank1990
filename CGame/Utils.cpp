@@ -11,7 +11,7 @@ void initializeLoopFunctions(int maxSize)
 	loopFunctions.registrated = true;
 }
 
-void registerLoopFunction(LoopFunction function)
+void extern registerLoopFunction(LoopFunction function)
 {
 	if (!loopFunctions.registrated)
 	{

@@ -5,6 +5,7 @@ MenuStruct::MenuStruct()
 	maxSize = MENU_MAX_ELEMENTS;
 	registered = false;
 	menuIterator = 0;
+	currentSize = 0;
 }
 
 MenuStruct::MenuStruct(int size) {
@@ -84,17 +85,24 @@ void MenuStruct::display(ALLEGRO_DISPLAY * display)
 
 void MenuStruct::incrementMenuIterator()
 {
+	//menu has no menu entries
+	if (this->currentSize == 0)
+		return;
 	this->menuIterator++;
 	this->menuIterator = this->menuIterator % this->currentSize;
 }
 
 void MenuStruct::decrementMenuIterator()
 {
+	//menu has no menu entries
+	if (this->currentSize == 0)
+		return;
+	logMessage(std::to_string(this->currentSize-1));
 	this->menuIterator = (this->menuIterator + this->currentSize-1) % this->currentSize;
 }
 
 
-void MenuStruct::loop(ALLEGRO_DISPLAY * display, ALLEGRO_TIMER * timer, ALLEGRO_EVENT_QUEUE * eventQueue, ALLEGRO_EVENT * eventObject)
+void MenuStruct::menuStructLoop(ALLEGRO_DISPLAY * display, ALLEGRO_TIMER * timer, ALLEGRO_EVENT_QUEUE * eventQueue, ALLEGRO_EVENT * eventObject)
 {
 
 	switch (eventObject->type)
@@ -105,10 +113,10 @@ void MenuStruct::loop(ALLEGRO_DISPLAY * display, ALLEGRO_TIMER * timer, ALLEGRO_
 		switch (eventObject->keyboard.keycode)
 		{
 		case ALLEGRO_KEY_UP:
-			this->incrementMenuIterator();
+			logMessage("mleko up");
 			break;
 		case ALLEGRO_KEY_DOWN:
-			this->decrementMenuIterator();
+			logMessage("mleko");
 			break;
 		default:
 			break;

@@ -22,7 +22,7 @@ void gameLoop(ALLEGRO_DISPLAY *display, ALLEGRO_TIMER *timer, ALLEGRO_EVENT_QUEU
 		case ALLEGRO_KEY_UP:
 			game.player.position.y++;
 			game.player.movementDirection = North;
-
+			logMessage("going up!");
 			break;
 		case ALLEGRO_KEY_DOWN:
 			game.player.position.y--;

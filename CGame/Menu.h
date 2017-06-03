@@ -22,7 +22,7 @@ struct MenuStruct
 	unsigned int topMargin;
 	unsigned int leftMargin;
 	unsigned int menuIterator;
-	bool registered;
+	bool registered;	
 	bool automaticLeftMargin;
 	ALLEGRO_FONT *font;
 	MenuStruct();
@@ -36,5 +36,5 @@ struct MenuStruct
 	void display(ALLEGRO_DISPLAY *display);
 	void incrementMenuIterator();
 	void decrementMenuIterator();
-	void loop(ALLEGRO_DISPLAY *display, ALLEGRO_TIMER *timer, ALLEGRO_EVENT_QUEUE *eventQueue, ALLEGRO_EVENT * eventObject);
+	void menuStructLoop(ALLEGRO_DISPLAY *display, ALLEGRO_TIMER *timer, ALLEGRO_EVENT_QUEUE *eventQueue, ALLEGRO_EVENT * eventObject);
 };

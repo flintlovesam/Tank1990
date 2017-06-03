@@ -12,7 +12,7 @@ struct LoopFunctionsStruct
 };
 
 void initializeLoopFunctions(int maxSize);
-void registerLoopFunction(LoopFunction function);
+void extern registerLoopFunction(LoopFunction function);
 //void registerLoopFunction(LoopFunction * function);
 LoopFunction * getLoopFunctions(int &size);
 void GlobalLoop(ALLEGRO_DISPLAY *, ALLEGRO_TIMER *, ALLEGRO_EVENT_QUEUE *, ALLEGRO_EVENT * eventObject);

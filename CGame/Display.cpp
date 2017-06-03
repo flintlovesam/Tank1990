@@ -16,33 +16,41 @@ bool menuSelectorEnabled = false;
 //	registerLoopFunction(&displayLoop);
 //}
 
-void displayScreen(SCREEN_NAME screen, ALLEGRO_DISPLAY *display_arg, ALLEGRO_TIMER *timer_arg , ALLEGRO_FONT *font_arg)
+void displayScreen(SCREEN_NAME screen, ALLEGRO_DISPLAY *display_arg, ALLEGRO_TIMER *timer_arg, ALLEGRO_FONT *font_arg)
 {
 	if (!display_arg)
 		return;
 	if (!font_arg)
 		return;
+	if (&menus[screen].currentSize == 0)
+	{
+		logMessage("Menu has no items!", MESSAGE_ERROR);
+		return;
+	}
+
 	activeMenu = &menus[screen];
 	menuSelectorEnabled = true;
-	//switch (screen)
-	//{
-	//case SCREEN_MENU:
-	//	activeMenu = &menus[SCREEN_GAME];
-	//	break;
+	switch (screen)
+	{
+	case SCREEN_MENU:
+		activeMenu = &menus[SCREEN_GAME];
+		break;
 
-	//case SCREEN_SETTINGS:
-	//	menus[SCREEN_SETTINGS].display(display);
-	//	break;
+	case SCREEN_SETTINGS:
+		activeMenu = &menus[screen];
+		menus[SCREEN_SETTINGS].display(display);
 
-	//default:
-	//	break;
-	//}
+		break;
+
+	default:
+		break;
+	}
 }
 
 
 void changeBackgroundColor(unsigned char r, unsigned char g, unsigned char b)
 {
-	currentBackgroundColor = al_map_rgb(r,g,b);
+	currentBackgroundColor = al_map_rgb(r, g, b);
 	al_clear_to_color(currentBackgroundColor);
 	al_flip_display();
 }
@@ -54,7 +62,7 @@ void changeBackgroundColor(ALLEGRO_COLOR color)
 
 void initializeMenus(ALLEGRO_DISPLAY *display_arg, ALLEGRO_FONT *font_arg)
 {
-	
+
 	display = display_arg;
 	font = font_arg;
 
@@ -67,17 +75,20 @@ void initializeMenus(ALLEGRO_DISPLAY *display_arg, ALLEGRO_FONT *font_arg)
 
 	MenuElement *element = new MenuElement();
 	element->title = "Start new game";
-
+	element->function = &DisplayGame;
 	menu->AddElement(*element);
+
 	element = new MenuElement();
 	element->title = "Settings";
-	element->function = &doSth;
+	element->function = &DisplaySettings;
 	menu->AddElement(*element);
+
 	element = new MenuElement();
 	element->title = "Exit";
 	menu->AddElement(*element);
+	registerLoopFunction(&MenuStruct::menuStructLoop);
 
-	menus[SCREEN_MENU] = *menu;
+	menus[SCREEN_SETTINGS] = *menu;
 
 	menu = new MenuStruct(5);
 	menu->AutomaticLeftMargin(true);
@@ -92,10 +103,10 @@ void initializeMenus(ALLEGRO_DISPLAY *display_arg, ALLEGRO_FONT *font_arg)
 	element->title = "Back";
 	menu->AddElement(*element);
 
-	menus[SCREEN_SETTINGS] = *menu;
+	menus[SCREEN_MENU] = *menu;
 
 
-//	delete menu;
+	//	delete menu;
 
 }
 
@@ -104,7 +115,11 @@ ALLEGRO_COLOR getBackgroundColor()
 	return currentBackgroundColor;
 }
 
-void doSth()
+void DisplaySettings()
+{
+	displayScreen(SCREEN_SETTINGS, display, timer, font);
+}
+void DisplayGame()
 {
 	displayScreen(SCREEN_GAME, display, timer, font);
 }
@@ -121,19 +136,20 @@ void displayLoop(ALLEGRO_DISPLAY *display, ALLEGRO_TIMER *timer, ALLEGRO_EVENT_Q
 		switch (eventObject->keyboard.keycode)
 		{
 		case ALLEGRO_KEY_UP:
-			activeMenu->incrementMenuIterator();
+			if (activeMenu != nullptr && activeMenu->currentSize > 0)
+				activeMenu->decrementMenuIterator();
 
 			break;
 		case ALLEGRO_KEY_DOWN:
+			if (activeMenu != nullptr && activeMenu->currentSize > 0)
+				activeMenu->incrementMenuIterator();
 
-			activeMenu->decrementMenuIterator();
 
 			break;
 		case ALLEGRO_KEY_ENTER:
 			if (activeMenu->element[activeMenu->menuIterator].function != nullptr)
 			{
 				activeMenu->element[activeMenu->menuIterator].function();
-				activeMenu = nullptr;
 			}
 			break;
 		default:
